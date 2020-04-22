@@ -1,0 +1,46 @@
+#txt,
+#hide{
+    display: flex;
+    background: inherit;
+    margin:0;
+    padding:0;
+    /* position: fixed; */
+    font: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+#txt{
+    border:none;
+    min-width: 1rem;
+    min-height: 1rem;
+    color: inherit;
+    /* background: green; */
+    /* display: flex; */
+    resize: none;
+    overflow: hidden;
+    /* overflow: hidden; */
+}
+textarea:focus{
+    outline: none; 
+}
+textarea:hover{
+    outline: hsla(210, 100%,  30%, 0.4) solid 0.2rem;
+    outline-offset: -0.1rem;
+    /* outline-style:  dotted; */
+}
+#hide{
+    white-space: pre-wrap;
+    /* position: absolute; */
+    color: red;
+    /* background: red; */
+    /* overflow: hidden; */
+    /* height: 0; */
+    /* position: absolute; */
+    /* visibility: hidden; */
+}
+#noHeight {
+    height: 0;
+    width: fit-content;
+    overflow: hidden;
+}
