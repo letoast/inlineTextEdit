@@ -72,7 +72,7 @@ const Reactions = ( props ) => {
             <div className="reactions-icons-div">
                 <Popup ref={node} popup={popup} availReactions={availReactions} reactionChange={reactionChange}></Popup>
                 <div style={{display: "flex", marginRight: "0.6rem"}}>
-                    { Object.keys(reactions).map((key, idx, array) => 
+                    { Object.keys(reactions).forEach((key, idx, array) => 
                         <i  className="reaction-icon" 
                             key={idx}
                             id={key}
