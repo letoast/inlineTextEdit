@@ -66,6 +66,7 @@ const Reactions = ( props ) => {
         setReactions( { ...reactions, [currSel]: availReactions[idx] } )
         setPopup(false)
         document.removeEventListener("click", clickListener);
+        console.log("adasas")
     }
     
     return (
