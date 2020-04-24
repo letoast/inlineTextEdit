@@ -49,7 +49,7 @@ const Reactions = ( props ) => {
     
     const [availReactions, setAvailReactions] = useState([])
     
-    const handleClick = (e) => {
+    const handleClick = useCallback((e) => {
         setPopup(true)
         setCurrSel(e.target.id)
         setAvailReactions( bgOffsets.filter( element => {
@@ -60,7 +60,7 @@ const Reactions = ( props ) => {
         })
         )
         document.addEventListener("click", clickListener);
-    }
+    }, [bgOffsets, clickListener, reactions])
     
     const reactionChange = (idx) => {
         setReactions( { ...reactions, [currSel]: availReactions[idx] } )
