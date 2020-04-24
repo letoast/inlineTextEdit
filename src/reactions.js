@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback } from "react"
 import InlineTextEdit from "./inlineTextEdit"
 
-const Popup = React.forwardRef( ({ popup, availReactions, reactionChange, ...props}, ref) => {
+const Popup = React.forwardRef( ({ popup, availReactions, reactionChange, ...props}, node) => {
     
     return(
-        <div ref={ref} className={`test ${popup ? "show" : "hide"}`}>
+        <div ref={node} className={`test ${popup ? "show" : "hide"}`}>
                     { availReactions.map((offset, idx) => 
                         <i  key={idx}
                             className="reaction-icon" 
@@ -14,7 +14,7 @@ const Popup = React.forwardRef( ({ popup, availReactions, reactionChange, ...pro
                     }
         </div>
     )
-})
+} )
 
 const Reactions = ( props ) => {
     

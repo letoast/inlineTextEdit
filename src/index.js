@@ -19,7 +19,7 @@ function Main() {
           onChange={e=>setImg2(URL.createObjectURL(e.target.files[0]))}
           />
           <label htmlFor="file1" className="chooseFile">
-          <div className="headImage changeImg" style={{backgroundImage: img2 ? `url(${img2})` : `url(//unsplash.it/500/300)` }} />
+          <div className="headImage changeImg" style={{backgroundImage: img2 ? `url(${img2})` : `url(https://unsplash.it/500/300)` }} />
           </label>
           <div className="headText">
             <h4 className="card-headline">
@@ -43,7 +43,7 @@ function Main() {
        { /*<div className="middle">
           <h1 className="textOverlay">Change Image...</h1>
         </div>*/ }
-        <div className="changeImg bodyImg" style={{backgroundImage: img1 ? `url(${img1})` : `url(//unsplash.it/500/300)` }} />
+        <div className="changeImg bodyImg" style={{backgroundImage: img1 ? `url(${img1})` : `url(https://unsplash.it/500/300)` }} />
       </label>
       <div className="cardText">
         <div className="reactions-div">
