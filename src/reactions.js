@@ -37,11 +37,11 @@ const Reactions = ( props ) => {
         "-49px -1178px",
     ]
     
-    const [reactions, setReactions] = useState({
-        first: bgOffsets[0],
-        second: bgOffsets[1],
-        third: bgOffsets[2]
-    })
+    const [reactions, setReactions] = useState(new Map([
+        ["first", bgOffsets[0]],
+        ["second", bgOffsets[1]],
+        ["third", bgOffsets[2]]
+    ]))
     
     const [popup, setPopup] = useState(false)
     
@@ -49,35 +49,35 @@ const Reactions = ( props ) => {
     
     const [availReactions, setAvailReactions] = useState([])
     
-    const handleClick = useCallback((e) => {
+    const handleClick = (e) => {
         setPopup(true)
         setCurrSel(e.target.id)
         setAvailReactions( bgOffsets.filter( element => {
-            for( const key in reactions){
-                if( element === reactions[key] ) return false
+            for( const key of [...reactions.keys()]){
+                if( element === reactions.get(key) ) return false
             }
             return true
         })
         )
         document.addEventListener("click", clickListener);
-    }, [bgOffsets, clickListener, reactions])
+    }
     
     const reactionChange = (idx) => {
-        setReactions( { ...reactions, [currSel]: availReactions[idx] } )
+        setReactions( new Map( reactions.set(currSel, availReactions[idx] ) ) )
         setPopup(false)
         document.removeEventListener("click", clickListener);
-        console.log("adasas")
+        // console.log("adasas")
     }
     
     return (
             <div className="reactions-icons-div">
                 <Popup ref={node} popup={popup} availReactions={availReactions} reactionChange={reactionChange}></Popup>
                 <div style={{display: "flex", marginRight: "0.6rem"}}>
-                    { Object.keys(reactions).map((key, idx, array) => 
+                    { [...reactions.keys()].map((key, idx, array) => 
                         <i  className="reaction-icon" 
                             key={idx}
                             id={key}
-                            style={{ zIndex: array.length-idx, backgroundPosition: reactions[key] }}
+                            style={{ zIndex: array.length-idx, backgroundPosition: reactions.get(key) }}
                             onClick={handleClick}
                         /> )
                     }
