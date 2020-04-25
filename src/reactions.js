@@ -37,24 +37,25 @@ const Reactions = ( props ) => {
         "-49px -1178px",
     ]
     
-    const [reactions, setReactions] = useState(new Map([
-        ["first", bgOffsets[0]],
-        ["second", bgOffsets[1]],
-        ["third", bgOffsets[2]]
-    ]))
+    const [reactions, setReactions] = useState([
+        bgOffsets[0],
+        bgOffsets[1],
+        bgOffsets[2]
+    ])
     
     const [popup, setPopup] = useState(false)
     
-    const [currSel, setCurrSel] = useState()
+    const [currSel, setCurrSel] = useState(null)
     
     const [availReactions, setAvailReactions] = useState([])
     
     const handleClick = (e) => {
         setPopup(true)
+        // console.log(e.target.key)
         setCurrSel(e.target.id)
         setAvailReactions( bgOffsets.filter( element => {
-            for( const key of [...reactions.keys()]){
-                if( element === reactions.get(key) ) return false
+            for( const key in reactions){
+                if( element === reactions[key] ) return false
             }
             return true
         })
@@ -63,7 +64,11 @@ const Reactions = ( props ) => {
     }
     
     const reactionChange = (idx) => {
-        setReactions( new Map( reactions.set(currSel, availReactions[idx] ) ) )
+        // console.log(reactions.map( (value, i)=> i === currSel ? availReactions[idx] : value ))
+        setReactions( reactions.map( (value, i)=> {
+            // console.log(i, currSel)
+            return i.toString() === currSel ? availReactions[idx] : value 
+        }) )
         setPopup(false)
         document.removeEventListener("click", clickListener);
         // console.log("adasas")
@@ -73,11 +78,11 @@ const Reactions = ( props ) => {
             <div className="reactions-icons-div">
                 <Popup ref={node} popup={popup} availReactions={availReactions} reactionChange={reactionChange}></Popup>
                 <div style={{display: "flex", marginRight: "0.6rem"}}>
-                    { [...reactions.keys()].map((key, idx, array) => 
+                    { reactions.map((value, idx, array) => 
                         <i  className="reaction-icon" 
                             key={idx}
-                            id={key}
-                            style={{ zIndex: array.length-idx, backgroundPosition: reactions.get(key) }}
+                            id={idx}
+                            style={{ zIndex: array.length-idx, backgroundPosition: reactions[idx] }}
                             onClick={handleClick}
                         /> )
                     }
