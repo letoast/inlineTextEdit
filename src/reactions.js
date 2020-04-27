@@ -49,10 +49,10 @@ const Reactions = ( props ) => {
     
     const [availReactions, setAvailReactions] = useState([])
     
-    const handleClick = (e) => {
+    const handleClick = (e, id) => {
         setPopup(true)
-        // console.log(e.target.key)
-        setCurrSel(e.target.id)
+        // console.log(e.target.getAttribute("something"))
+        setCurrSel(id)
         setAvailReactions( bgOffsets.filter( element => {
             for( const key in reactions){
                 if( element === reactions[key] ) return false
@@ -67,7 +67,7 @@ const Reactions = ( props ) => {
         // console.log(reactions.map( (value, i)=> i === currSel ? availReactions[idx] : value ))
         setReactions( reactions.map( (value, i)=> {
             // console.log(i, currSel)
-            return i.toString() === currSel ? availReactions[idx] : value 
+            return i === currSel ? availReactions[idx] : value 
         }) )
         setPopup(false)
         document.removeEventListener("click", clickListener);
@@ -81,9 +81,8 @@ const Reactions = ( props ) => {
                     { reactions.map((value, idx, array) => 
                         <i  className="reaction-icon" 
                             key={idx}
-                            id={idx}
                             style={{ zIndex: array.length-idx, backgroundPosition: reactions[idx] }}
-                            onClick={handleClick}
+                            onClick={(e)=>handleClick(e, idx)}
                         /> )
                     }
                 </div>
